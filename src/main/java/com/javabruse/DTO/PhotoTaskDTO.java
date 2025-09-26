@@ -19,4 +19,17 @@ public class PhotoTaskDTO {
     private String address;
     private Double latitude;
     private Double longitude;
+
+    @Override
+    public String toString() {
+        return "PhotoTaskDTO{" +
+                "id=" + id +
+                ", taskID=" + taskID +
+                ", photoID=" + photoID +
+                ", filePath='" + filePath + '\'' +
+                ", address='" + address + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }
