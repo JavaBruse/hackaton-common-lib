@@ -11,4 +11,7 @@ public class PhotoRequest {
     private UUID id;
     private String filePath;
     private UUID taskId;
+    private String name;
+    private String contentType;
+    private Long fileSize;
 }

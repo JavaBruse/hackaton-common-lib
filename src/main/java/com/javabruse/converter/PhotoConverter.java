@@ -28,6 +28,9 @@ public class PhotoConverter {
         photoResponse.setFilePath(photo.getFilePath());
         photoResponse.setFileHash(photo.getFileHash());
         photoResponse.setUpdatedAt(photo.getUpdatedAt());
+        photoResponse.setName(photo.getName());
+        photoResponse.setContentType(photo.getContentType());
+        photoResponse.setFileSize(photo.getFileSize());
         photoResponse.setCamMetadataResponse(camMetadataToResponse(photo.getCamMetadata()));
         photoResponse.setConstructMetadataResponses(constructMetadataToResponse(photo.getConstructMetadata()));
         return photoResponse;
@@ -39,6 +42,9 @@ public class PhotoConverter {
             photo.setUserId(userId);
             photo.setFilePath(photoRequest.getFilePath());
             photo.setFileHash("hash");
+            photo.setName(photoRequest.getName());
+            photo.setContentType(photoRequest.getContentType());
+            photo.setFileSize(photoRequest.getFileSize());
             Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
             photo.setTask(task);
             photo.setCamMetadata(null);

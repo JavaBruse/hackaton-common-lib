@@ -1,6 +1,5 @@
 package com.javabruse.DTO;
 
-import com.javabruse.model.Task;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +14,9 @@ public class PhotoResponse {
     private UUID id;
     private String filePath;
     private String fileHash;
+    private String name;
+    private String contentType;
+    private Long fileSize;
     private Long updatedAt = Instant.now().toEpochMilli();
     private CamMetadataResponse camMetadataResponse;
     private List<ConstructMetadataResponse> constructMetadataResponses = new ArrayList<>();

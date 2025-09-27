@@ -19,8 +19,17 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", length = 250)
+    private String name;
+
+    @Column(name = "content_type")
+    private String contentType;
+
+    @Column(name = "file_size")
+    private Long fileSize;
+
     @Column(name = "file_path")
-    private String filePath;// Где хранится фото (локально или ссылка на storage/S3)
+    private String filePath; // Где хранится фото (локально или ссылка на storage/S3)
 
     @Column(name = "file_hash", length = 250)  // добавляем поле х
     private String fileHash;
