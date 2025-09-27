@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
@@ -32,9 +33,10 @@ public class PhotoConverter {
         return photoResponse;
     }
 
-    public Photo photoRequestToNewPhoto(PhotoRequest photoRequest){
+    public Photo photoRequestToNewPhoto(PhotoRequest photoRequest, UUID userId){
             Photo photo = new Photo();
             photo.setId(null);
+            photo.setUserId(userId);
             photo.setFileHash(photoRequest.getFilePath());
             photo.setFileHash("hash");
             Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
