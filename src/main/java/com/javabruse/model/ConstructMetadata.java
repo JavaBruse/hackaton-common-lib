@@ -9,23 +9,26 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "photo_metadata", schema = "master_schema")
-public class PhotoMetadata {
+@Table(name = "construct_metadata")
+public class ConstructMetadata {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "address")
-    private String address;   // Адрес объекта
+    private String address;
 
     @Column(name = "latitude")
-    private Double latitude;  // Широта
+    private Double latitude;
 
     @Column(name = "longitude")
-    private Double longitude; // Долгота
+    private Double longitude;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "photo_id")
     private Photo photo;
 }
