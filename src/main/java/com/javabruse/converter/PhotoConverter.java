@@ -37,7 +37,7 @@ public class PhotoConverter {
             Photo photo = new Photo();
             photo.setId(null);
             photo.setUserId(userId);
-            photo.setFileHash(photoRequest.getFilePath());
+            photo.setFilePath(photoRequest.getFilePath());
             photo.setFileHash("hash");
             Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
             photo.setTask(task);
