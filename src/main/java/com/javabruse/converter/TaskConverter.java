@@ -2,6 +2,7 @@ package com.javabruse.converter;
 
 import com.javabruse.DTO.TaskRequest;
 import com.javabruse.DTO.TaskResponse;
+import com.javabruse.model.Status;
 import com.javabruse.model.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,14 +29,14 @@ public class TaskConverter {
         Task task = new Task();
         task.setName(taskRequest.getName());
         task.setUserId(userId);
-        task.setStatus(taskRequest.getStatus());
+        task.setStatus(Status.TASK_NEW);
         task.setPhotos(null);
         return task;
     }
 
     public Task taskRequestUpdate(TaskRequest taskRequest, Task taskOld){
         taskOld.setName(taskRequest.getName());
-        taskOld.setStatus(taskRequest.getStatus());
+        taskOld.setStatus(Status.TASK_NEW);
         return taskOld;
     }
 }

@@ -3,7 +3,6 @@ package com.javabruse.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.engine.spi.Status;
 
 import java.time.Instant;
 import java.util.ArrayList;

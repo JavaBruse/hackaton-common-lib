@@ -1,9 +1,9 @@
 package com.javabruse.DTO;
 
 
+import com.javabruse.model.Status;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.engine.spi.Status;
 
 import java.time.Instant;
 import java.util.UUID;
