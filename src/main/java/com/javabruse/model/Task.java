@@ -23,6 +23,9 @@ public class Task {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "user_id")
+    private UUID userId;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;            // NEW, IN_PROGRESS, COMPLETED и т.д.
