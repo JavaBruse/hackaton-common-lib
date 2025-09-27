@@ -10,11 +10,13 @@ import com.javabruse.model.Photo;
 import com.javabruse.model.Task;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
+@Component
 public class PhotoConverter {
 
    private final TaskRepo taskRepo;

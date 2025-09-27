@@ -4,10 +4,12 @@ import com.javabruse.DTO.TaskRequest;
 import com.javabruse.DTO.TaskResponse;
 import com.javabruse.model.Task;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @RequiredArgsConstructor
+@Component
 public class TaskConverter {
 
     private final PhotoConverter photoConverter;

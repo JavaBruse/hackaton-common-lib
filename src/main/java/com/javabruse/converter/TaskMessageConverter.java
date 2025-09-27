@@ -11,6 +11,7 @@ import com.javabruse.model.Task;
 import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
+@Component
 public class TaskMessageConverter {
     private final PhotoRepo photoRepo;
     private final TaskRepo taskRepo;
