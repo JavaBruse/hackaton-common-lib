@@ -25,6 +25,9 @@ public class Photo {
     @Column(name = "file_hash", length = 250)  // добавляем поле х
     private String fileHash;
 
+    @Column(name = "user_id")
+    private UUID userId;
+
     @Column(name = "updated_at", nullable = false)
     private Long updatedAt = Instant.now().toEpochMilli();
 
