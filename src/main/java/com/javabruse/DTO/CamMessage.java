@@ -14,4 +14,17 @@ public class CamMessage {
     private Double longitude;
     private Double bearing;
     private Double elevation;
+
+
+    @Override
+    public String toString() {
+        return "CamMessage{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", bearing=" + bearing +
+                ", elevation=" + elevation +
+                '}';
+    }
 }
