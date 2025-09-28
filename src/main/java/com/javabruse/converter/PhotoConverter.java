@@ -48,7 +48,7 @@ public class PhotoConverter {
             Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
             photo.setTask(task);
             photo.setCamMetadata(null);
-            photo.setConstructMetadata(null);
+            photo.setConstructMetadata(new ArrayList<>());
             return photo;
     }
 
