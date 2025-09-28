@@ -28,8 +28,9 @@ public class Photo {
     @Column(name = "file_size")
     private Long fileSize;
 
-    @Column(name = "completed")
-    private Boolean completed = false;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status;            // NEW, IN_PROGRESS, COMPLETED и т.д.
 
     @Column(name = "file_path")
     private String filePath; // Где хранится фото (локально или ссылка на storage/S3)

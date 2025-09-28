@@ -29,7 +29,7 @@ public class PhotoConverter {
         photoResponse.setFileHash(photo.getFileHash());
         photoResponse.setUpdatedAt(photo.getUpdatedAt());
         photoResponse.setName(photo.getName());
-        photoResponse.setCompleted(photo.getCompleted());
+        photoResponse.setStatus(photo.getStatus());
         photoResponse.setContentType(photo.getContentType());
         photoResponse.setFileSize(photo.getFileSize());
         if (photo.getCamMetadata() != null) {

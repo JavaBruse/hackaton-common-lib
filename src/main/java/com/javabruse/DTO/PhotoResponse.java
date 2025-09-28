@@ -1,5 +1,6 @@
 package com.javabruse.DTO;
 
+import com.javabruse.model.Status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,7 @@ public class PhotoResponse {
     private String name;
     private String contentType;
     private Long fileSize;
-    private Boolean completed;
+    private Status status;
     private Long updatedAt = Instant.now().toEpochMilli();
     private CamMetadataResponse camMetadataResponse;
     private List<ConstructMetadataResponse> constructMetadataResponses = new ArrayList<>();
