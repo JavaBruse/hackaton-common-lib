@@ -4,10 +4,7 @@ import com.javabruse.DTO.CamMessage;
 import com.javabruse.DTO.ConstructionMessage;
 import com.javabruse.DTO.PhotoMessage;
 import com.javabruse.DTO.TaskMessage;
-import com.javabruse.model.CamMetadata;
-import com.javabruse.model.ConstructMetadata;
-import com.javabruse.model.Photo;
-import com.javabruse.model.Task;
+import com.javabruse.model.*;
 import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +22,13 @@ public class TaskMessageConverter {
     private final PhotoRepo photoRepo;
     private final TaskRepo taskRepo;
 
-    public Photo photoTaskToPhoto(TaskMessage photoTaskDTO, Boolean isComplete) {
+    public Photo photoTaskToPhoto(TaskMessage photoTaskDTO, Status status) {
         Optional<Photo> photo = photoRepo.findById(photoTaskDTO.getPhotoMessage().getId());
         if (photo.isPresent()) {
             Photo newPhoto = photo.get();
             newPhoto.setTask(taskRepo.findById(photoTaskDTO.getTaskID()).get());
             newPhoto.setUpdatedAt(Instant.now().toEpochMilli());
-            newPhoto.setCompleted(isComplete);
+            newPhoto.setStatus(status);
             newPhoto.setConstructMetadata(toConstructMetaData(photoTaskDTO.getPhotoMessage().getConstructionMessageList()));
             return newPhoto;
         }
