@@ -17,6 +17,7 @@ public class PhotoResponse {
     private String name;
     private String contentType;
     private Long fileSize;
+    private Boolean completed;
     private Long updatedAt = Instant.now().toEpochMilli();
     private CamMetadataResponse camMetadataResponse;
     private List<ConstructMetadataResponse> constructMetadataResponses = new ArrayList<>();

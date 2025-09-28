@@ -25,11 +25,11 @@ public class PhotoConverter {
     public PhotoResponse PhotoToPhotoResponse(Photo photo){
         PhotoResponse photoResponse = new PhotoResponse();
         photoResponse.setId(photo.getId());
-
         photoResponse.setFilePath(photo.getFilePath());
         photoResponse.setFileHash(photo.getFileHash());
         photoResponse.setUpdatedAt(photo.getUpdatedAt());
         photoResponse.setName(photo.getName());
+        photoResponse.setCompleted(photo.getCompleted());
         photoResponse.setContentType(photo.getContentType());
         photoResponse.setFileSize(photo.getFileSize());
         if (photo.getCamMetadata() != null) {

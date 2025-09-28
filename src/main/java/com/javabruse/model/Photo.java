@@ -28,6 +28,9 @@ public class Photo {
     @Column(name = "file_size")
     private Long fileSize;
 
+    @Column(name = "completed")
+    private Boolean completed;
+
     @Column(name = "file_path")
     private String filePath; // Где хранится фото (локально или ссылка на storage/S3)
 

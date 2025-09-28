@@ -25,12 +25,13 @@ public class TaskMessageConverter {
     private final PhotoRepo photoRepo;
     private final TaskRepo taskRepo;
 
-    public Photo photoTaskToPhoto(TaskMessage photoTaskDTO) {
+    public Photo photoTaskToPhoto(TaskMessage photoTaskDTO, Boolean isComplete) {
         Optional<Photo> photo = photoRepo.findById(photoTaskDTO.getPhotoMessage().getId());
         if (photo.isPresent()) {
             Photo newPhoto = photo.get();
             newPhoto.setTask(taskRepo.findById(photoTaskDTO.getTaskID()).get());
             newPhoto.setUpdatedAt(Instant.now().toEpochMilli());
+            newPhoto.setCompleted(isComplete);
             newPhoto.setConstructMetadata(toConstructMetaData(photoTaskDTO.getPhotoMessage().getConstructionMessageList()));
             return newPhoto;
         }
