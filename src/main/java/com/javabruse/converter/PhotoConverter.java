@@ -4,10 +4,7 @@ import com.javabruse.DTO.CamMetadataResponse;
 import com.javabruse.DTO.ConstructMetadataResponse;
 import com.javabruse.DTO.PhotoRequest;
 import com.javabruse.DTO.PhotoResponse;
-import com.javabruse.model.CamMetadata;
-import com.javabruse.model.ConstructMetadata;
-import com.javabruse.model.Photo;
-import com.javabruse.model.Task;
+import com.javabruse.model.*;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,9 +17,9 @@ import java.util.UUID;
 @Component
 public class PhotoConverter {
 
-   private final TaskRepo taskRepo;
+    private final TaskRepo taskRepo;
 
-    public PhotoResponse PhotoToPhotoResponse(Photo photo){
+    public PhotoResponse PhotoToPhotoResponse(Photo photo) {
         PhotoResponse photoResponse = new PhotoResponse();
         photoResponse.setId(photo.getId());
         photoResponse.setFilePath(photo.getFilePath());
@@ -35,29 +32,30 @@ public class PhotoConverter {
         if (photo.getCamMetadata() != null) {
             photoResponse.setCamMetadataResponse(camMetadataToResponse(photo.getCamMetadata()));
         }
-        if (!photo.getConstructMetadata().isEmpty()){
+        if (!photo.getConstructMetadata().isEmpty()) {
             photoResponse.setConstructMetadataResponses(constructMetadataToResponse(photo.getConstructMetadata()));
         }
         return photoResponse;
     }
 
-    public Photo photoRequestToNewPhoto(PhotoRequest photoRequest, UUID userId){
-            Photo photo = new Photo();
-            photo.setId(null);
-            photo.setUserId(userId);
-            photo.setFilePath(photoRequest.getFilePath());
-            photo.setFileHash("hash");
-            photo.setName(photoRequest.getName());
-            photo.setContentType(photoRequest.getContentType());
-            photo.setFileSize(photoRequest.getFileSize());
-            Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
-            photo.setTask(task);
+    public Photo photoRequestToNewPhoto(PhotoRequest photoRequest, UUID userId) {
+        Photo photo = new Photo();
+        photo.setId(null);
+        photo.setUserId(userId);
+        photo.setFilePath(photoRequest.getFilePath());
+        photo.setFileHash("hash");
+        photo.setName(photoRequest.getName());
+        photo.setStatus(Status.TASK_NEW);
+        photo.setContentType(photoRequest.getContentType());
+        photo.setFileSize(photoRequest.getFileSize());
+        Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
+        photo.setTask(task);
 //            photo.setCamMetadata(null);
 //            photo.setConstructMetadata(new ArrayList<>());
-            return photo;
+        return photo;
     }
 
-    public Photo photoRequestToUpdatePhoto(PhotoRequest photoRequest, Photo oldPhoto ){
+    public Photo photoRequestToUpdatePhoto(PhotoRequest photoRequest, Photo oldPhoto) {
         oldPhoto.setFilePath(photoRequest.getFilePath());
         Task newTask = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
         if (!oldPhoto.getTask().equals(newTask)) {
@@ -66,7 +64,7 @@ public class PhotoConverter {
         return oldPhoto;
     }
 
-    private CamMetadataResponse camMetadataToResponse(CamMetadata camMetadata){
+    private CamMetadataResponse camMetadataToResponse(CamMetadata camMetadata) {
         CamMetadataResponse camMetadataResponse = new CamMetadataResponse();
         camMetadataResponse.setId(camMetadata.getId());
         camMetadataResponse.setAddress(camMetadata.getAddress());
@@ -77,9 +75,9 @@ public class PhotoConverter {
         return camMetadataResponse;
     }
 
-    private List<ConstructMetadataResponse> constructMetadataToResponse(List<ConstructMetadata> list){
+    private List<ConstructMetadataResponse> constructMetadataToResponse(List<ConstructMetadata> list) {
         List<ConstructMetadataResponse> constructMetadataResponses = new ArrayList<>();
-        for (ConstructMetadata data: list){
+        for (ConstructMetadata data : list) {
             ConstructMetadataResponse constructMetadataResponse = new ConstructMetadataResponse();
             constructMetadataResponse.setId(data.getId());
             constructMetadataResponse.setType(data.getType());
