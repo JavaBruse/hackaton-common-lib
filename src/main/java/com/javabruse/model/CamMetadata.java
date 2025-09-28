@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "cam_metadata")
+@Table(name = "cam_metadata", schema = "master_schema")
 public class CamMetadata {
 
     @Id
