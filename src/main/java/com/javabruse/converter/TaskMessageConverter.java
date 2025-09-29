@@ -40,12 +40,9 @@ public class TaskMessageConverter {
     public List<TaskMessage> taskToPhotoTaskDTOList(Task task) {
         List<TaskMessage> photoTaskDTOs = new ArrayList<>();
         for (Photo photo : task.getPhotos()) {
-            log.info("------------этап-1");
             TaskMessage photoTask = new TaskMessage();
             photoTask.setId(UUID.randomUUID());
-            log.info("------------этап-2");
             photoTask.setTaskID(task.getId());
-            log.info("------------этап-3");
             photoTask.setPhotoMessage(toPhotoMessage(photo));
             log.info("------------этап-4");
             photoTaskDTOs.add(photoTask);
@@ -74,7 +71,11 @@ public class TaskMessageConverter {
         PhotoMessage photoMessage = new PhotoMessage();
         photoMessage.setId(photo.getId());
         photoMessage.setFilePath(photo.getFilePath());
-        photoMessage.setCamMessage(toCamMessage(photo.getCamMetadata()));
+        try {
+            photoMessage.setCamMessage(toCamMessage(photo.getCamMetadata()));
+        } catch (Exception e){
+            photoMessage.setCamMessage(new CamMessage());
+        }
         photoMessage.setConstructionMessageList(toConstructionMessageList(photo.getConstructMetadata()));
         return  photoMessage;
     }
