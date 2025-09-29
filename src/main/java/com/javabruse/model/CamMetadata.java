@@ -31,6 +31,7 @@ public class CamMetadata {
     @Column(name = "elevation")
     private Double elevation;
 
-    @Column(name = "photo_id")
-    private UUID  photoId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "photo_id")
+    private Photo photo;
 }

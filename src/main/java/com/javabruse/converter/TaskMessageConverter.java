@@ -61,7 +61,7 @@ public class TaskMessageConverter {
                 camMetadata.get().setLongitude(camMessage.getLongitude());
                 camMetadata.get().setLatitude(camMessage.getLatitude());
                 camMetadata.get().setBearing(camMessage.getBearing());
-                camMetadata.get().setPhotoId(photo.getId());
+                camMetadata.get().setPhoto(photo);
                 return camMetadata.get();
             }
             return null;
@@ -83,7 +83,7 @@ public class TaskMessageConverter {
             message.setAddress(data.getAddress());
             message.setLatitude(data.getLatitude());
             message.setLongitude(data.getLongitude());
-            message.setPhotoId(photo.getId());
+            message.setPhoto(photo);
             newList.add(message);
         }
         return newList;
