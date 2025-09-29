@@ -10,7 +10,6 @@ import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -48,7 +47,6 @@ public class TaskMessageConverter {
             photoTask.setId(UUID.randomUUID());
             photoTask.setTaskID(task.getId());
             photoTask.setPhotoMessage(toPhotoMessage(photo));
-            log.info("------------этап-4");
             photoTaskDTOs.add(photoTask);
         }
         return photoTaskDTOs;
@@ -63,7 +61,7 @@ public class TaskMessageConverter {
                 camMetadata.get().setLongitude(camMessage.getLongitude());
                 camMetadata.get().setLatitude(camMessage.getLatitude());
                 camMetadata.get().setBearing(camMessage.getBearing());
-                camMetadata.get().setPhoto(photo);
+                camMetadata.get().setPhotoId(photo.getId());
                 return camMetadata.get();
             }
             return null;
@@ -85,7 +83,7 @@ public class TaskMessageConverter {
             message.setAddress(data.getAddress());
             message.setLatitude(data.getLatitude());
             message.setLongitude(data.getLongitude());
-            message.setPhoto(photo);
+            message.setPhotoId(photo.getId());
             newList.add(message);
         }
         return newList;

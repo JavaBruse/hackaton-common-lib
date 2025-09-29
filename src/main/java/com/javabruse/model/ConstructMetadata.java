@@ -31,7 +31,6 @@ public class ConstructMetadata {
     @Column(name = "longitude")
     private Double longitude;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "photo_id")
-    private Photo photo;
+    private UUID photoId;
 }
