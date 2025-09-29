@@ -5,6 +5,7 @@ import com.javabruse.DTO.ConstructionMessage;
 import com.javabruse.DTO.PhotoMessage;
 import com.javabruse.DTO.TaskMessage;
 import com.javabruse.model.*;
+import com.javabruse.repository.CamMetadataRepo;
 import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class TaskMessageConverter {
     private final PhotoRepo photoRepo;
     private final TaskRepo taskRepo;
+    private final CamMetadataRepo camMetadataRepo;
 
     public Photo photoTaskToPhoto(TaskMessage photoTaskDTO, Status status) {
         Optional<Photo> photo = photoRepo.findById(photoTaskDTO.getPhotoMessage().getId());
@@ -31,7 +33,8 @@ public class TaskMessageConverter {
             newPhoto.setTask(taskRepo.findById(photoTaskDTO.getTaskID()).get());
             newPhoto.setUpdatedAt(Instant.now().toEpochMilli());
             newPhoto.setStatus(status);
-            newPhoto.setConstructMetadata(toConstructMetaData(photoTaskDTO.getPhotoMessage().getConstructionMessageList()));
+            newPhoto.setCamMetadata(toCamMetaData(photoTaskDTO.getPhotoMessage().getCamMessage(), photo.get()));
+            newPhoto.setConstructMetadata(toConstructMetaData(photoTaskDTO.getPhotoMessage().getConstructionMessageList(), photo.get()));
             return newPhoto;
         }
         return null;
@@ -50,8 +53,22 @@ public class TaskMessageConverter {
         return photoTaskDTOs;
     }
 
+    private CamMetadata toCamMetaData(CamMessage camMessage, Photo photo){
+        Optional<CamMetadata> camMetadata = camMetadataRepo.findById(camMessage.getId());
+        if (camMetadata.isPresent()){
+            camMetadata.get().setAddress(camMessage.getAddress());
+            camMetadata.get().setElevation(camMessage.getElevation());
+            camMetadata.get().setLongitude(camMessage.getLongitude());
+            camMetadata.get().setLatitude(camMessage.getLatitude());
+            camMetadata.get().setBearing(camMessage.getBearing());
+            camMetadata.get().setPhoto(photo);
+            return camMetadata.get();
+        }
+        return null;
+    }
 
-    private List<ConstructMetadata> toConstructMetaData(List<ConstructionMessage> list){
+
+    private List<ConstructMetadata> toConstructMetaData(List<ConstructionMessage> list, Photo photo){
         List<ConstructMetadata> newList = new ArrayList<>();
         for (ConstructionMessage data:list){
             ConstructMetadata message = new ConstructMetadata();
@@ -62,6 +79,7 @@ public class TaskMessageConverter {
             message.setAddress(data.getAddress());
             message.setLatitude(data.getLatitude());
             message.setLongitude(data.getLongitude());
+            message.setPhoto(photo);
             newList.add(message);
         }
         return newList;
