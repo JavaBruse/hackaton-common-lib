@@ -16,6 +16,9 @@ public class ConstructMetadata {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "position")
+    private Integer position;
+
     @Column(name = "type")
     private String type;
 

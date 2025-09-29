@@ -80,6 +80,7 @@ public class PhotoConverter {
         for (ConstructMetadata data : list) {
             ConstructMetadataResponse constructMetadataResponse = new ConstructMetadataResponse();
             constructMetadataResponse.setId(data.getId());
+            constructMetadataResponse.setPosition(data.getPosition());
             constructMetadataResponse.setType(data.getType());
             constructMetadataResponse.setAddress(data.getAddress());
             constructMetadataResponse.setLongitude(data.getLongitude());

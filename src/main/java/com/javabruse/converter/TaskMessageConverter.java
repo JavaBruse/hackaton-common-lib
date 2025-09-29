@@ -53,6 +53,10 @@ public class TaskMessageConverter {
         for (ConstructionMessage data:list){
             ConstructMetadata message = new ConstructMetadata();
             message.setAddress(data.getAddress());
+            message.setId(data.getId());
+            message.setType(data.getType());
+            message.setPosition(data.getPosition());
+            message.setAddress(data.getAddress());
             message.setLatitude(data.getLatitude());
             message.setLongitude(data.getLongitude());
             newList.add(message);
@@ -84,6 +88,9 @@ public class TaskMessageConverter {
         List<ConstructionMessage> newList = new ArrayList<>();
         for (ConstructMetadata data:list){
             ConstructionMessage message = new ConstructionMessage();
+            message.setId(data.getId());
+            message.setType(data.getType());
+            message.setPosition(data.getPosition());
             message.setAddress(data.getAddress());
             message.setLatitude(data.getLatitude());
             message.setLongitude(data.getLongitude());

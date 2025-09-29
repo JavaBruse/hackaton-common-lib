@@ -9,6 +9,7 @@ import java.util.UUID;
 @Setter
 public class ConstructMetadataResponse {
     private UUID id;
+    private Integer position;
     private String type;
     private String address;
     private Double latitude;
