@@ -8,6 +8,7 @@ import com.javabruse.model.*;
 import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class TaskMessageConverter {
@@ -38,10 +40,14 @@ public class TaskMessageConverter {
     public List<TaskMessage> taskToPhotoTaskDTOList(Task task) {
         List<TaskMessage> photoTaskDTOs = new ArrayList<>();
         for (Photo photo : task.getPhotos()) {
+            log.info("------------этап-1");
             TaskMessage photoTask = new TaskMessage();
             photoTask.setId(UUID.randomUUID());
+            log.info("------------этап-2");
             photoTask.setTaskID(task.getId());
+            log.info("------------этап-3");
             photoTask.setPhotoMessage(toPhotoMessage(photo));
+            log.info("------------этап-4");
             photoTaskDTOs.add(photoTask);
         }
         return photoTaskDTOs;
