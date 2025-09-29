@@ -67,7 +67,7 @@ public class TaskMessageConverter {
                 return camMetadata.get();
             }
             return null;
-        }catch (InvalidDataAccessApiUsageException e){
+        }catch (Exception e){
             return new CamMetadata();
         }
 
