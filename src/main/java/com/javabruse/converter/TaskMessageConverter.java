@@ -10,6 +10,7 @@ import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -54,17 +55,22 @@ public class TaskMessageConverter {
     }
 
     private CamMetadata toCamMetaData(CamMessage camMessage, Photo photo){
-        Optional<CamMetadata> camMetadata = camMetadataRepo.findById(camMessage.getId());
-        if (camMetadata.isPresent()){
-            camMetadata.get().setAddress(camMessage.getAddress());
-            camMetadata.get().setElevation(camMessage.getElevation());
-            camMetadata.get().setLongitude(camMessage.getLongitude());
-            camMetadata.get().setLatitude(camMessage.getLatitude());
-            camMetadata.get().setBearing(camMessage.getBearing());
-            camMetadata.get().setPhoto(photo);
-            return camMetadata.get();
+        try {
+            Optional<CamMetadata> camMetadata = camMetadataRepo.findById(camMessage.getId());
+            if (camMetadata.isPresent()){
+                camMetadata.get().setAddress(camMessage.getAddress());
+                camMetadata.get().setElevation(camMessage.getElevation());
+                camMetadata.get().setLongitude(camMessage.getLongitude());
+                camMetadata.get().setLatitude(camMessage.getLatitude());
+                camMetadata.get().setBearing(camMessage.getBearing());
+                camMetadata.get().setPhoto(photo);
+                return camMetadata.get();
+            }
+            return null;
+        }catch (InvalidDataAccessApiUsageException e){
+            return new CamMetadata();
         }
-        return null;
+
     }
 
 
