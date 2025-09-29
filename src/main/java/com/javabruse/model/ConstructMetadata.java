@@ -31,6 +31,6 @@ public class ConstructMetadata {
     @Column(name = "longitude")
     private Double longitude;
 
-    @JoinColumn(name = "photo_id")
+    @Column(name = "photo_id")
     private UUID photoId;
 }

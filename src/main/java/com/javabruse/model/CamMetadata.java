@@ -31,6 +31,6 @@ public class CamMetadata {
     @Column(name = "elevation")
     private Double elevation;
 
-    @JoinColumn(name = "photo_id")
+    @Column(name = "photo_id")
     private UUID  photoId;
 }
