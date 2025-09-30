@@ -10,7 +10,8 @@ import java.util.UUID;
 @Setter
 public class PhotoMessage {
     private UUID id;
-    private String filePath;
+    private String filePathOriginal;
+    private String filePathComplete;
     CamMessage camMessage;
     List<ConstructionMessage> constructionMessageList;
 
@@ -18,9 +19,10 @@ public class PhotoMessage {
     public String toString() {
         return "PhotoMessage{" +
                 "id=" + id +
-                ", filePath='" + filePath + '\'' +
+                ", filePathOriginal='" + filePathOriginal + '\'' +
+                ", filePathComplete='" + filePathComplete + '\'' +
                 ", camMessage=" + camMessage +
-                ", constructionList=" + constructionMessageList +
+                ", constructionMessageList=" + constructionMessageList +
                 '}';
     }
 }

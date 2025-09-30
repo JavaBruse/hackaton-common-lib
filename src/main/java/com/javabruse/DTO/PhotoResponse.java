@@ -1,6 +1,7 @@
 package com.javabruse.DTO;
 
 import com.javabruse.model.Status;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,8 @@ import java.util.UUID;
 @Setter
 public class PhotoResponse {
     private UUID id;
-    private String filePath;
+    private String filePathOriginal;
+    private String filePathComplete;
     private String fileHash;
     private String name;
     private String contentType;

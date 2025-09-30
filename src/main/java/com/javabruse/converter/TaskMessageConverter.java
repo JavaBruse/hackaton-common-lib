@@ -26,21 +26,27 @@ public class TaskMessageConverter {
     private final TaskRepo taskRepo;
     private final CamMetadataRepo camMetadataRepo;
 
-    public Photo photoTaskToPhoto(TaskMessage photoTaskDTO, Status status) {
-        Optional<Photo> photo = photoRepo.findById(photoTaskDTO.getPhotoMessage().getId());
+    public Photo taskMessageToPhoto(TaskMessage taskMessage, Status status) {
+        Optional<Photo> photo = photoRepo.findById(taskMessage.getPhotoMessage().getId());
         if (photo.isPresent()) {
             Photo newPhoto = photo.get();
-            newPhoto.setTask(taskRepo.findById(photoTaskDTO.getTaskID()).get());
+            log.info("-----------------------------этап 1 в конвертере таки в фото--------");
+            newPhoto.setTask(taskRepo.findById(taskMessage.getTaskID()).get());
+            log.info("-----------------------------этап 2 в конвертере таки в фото--------");
             newPhoto.setUpdatedAt(Instant.now().toEpochMilli());
+            log.info("-----------------------------этап 3 в конвертере таки в фото--------");
             newPhoto.setStatus(status);
-            newPhoto.setCamMetadata(toCamMetaData(photoTaskDTO.getPhotoMessage().getCamMessage(), photo.get()));
-            newPhoto.setConstructMetadata(toConstructMetaData(photoTaskDTO.getPhotoMessage().getConstructionMessageList(), photo.get()));
+            log.info("-----------------------------этап 4 в конвертере таки в фото--------");
+            newPhoto.setCamMetadata(toCamMetaData(taskMessage.getPhotoMessage().getCamMessage(), photo.get()));
+            log.info("-----------------------------этап 5 в конвертере таки в фото--------");
+            newPhoto.setConstructMetadata(toConstructMetaData(taskMessage.getPhotoMessage().getConstructionMessageList(), photo.get()));
+            log.info("-----------------------------этап 6 в конвертере таки в фото завершено конвертирование--------" + taskMessage);
             return newPhoto;
         }
         return null;
     }
 
-    public List<TaskMessage> taskToPhotoTaskDTOList(Task task) {
+    public List<TaskMessage> taskToTaskMessageList(Task task) {
         List<TaskMessage> photoTaskDTOs = new ArrayList<>();
         for (Photo photo : task.getPhotos()) {
             TaskMessage photoTask = new TaskMessage();
@@ -52,10 +58,10 @@ public class TaskMessageConverter {
         return photoTaskDTOs;
     }
 
-    private CamMetadata toCamMetaData(CamMessage camMessage, Photo photo){
+    private CamMetadata toCamMetaData(CamMessage camMessage, Photo photo) {
         try {
             Optional<CamMetadata> camMetadata = camMetadataRepo.findById(camMessage.getId());
-            if (camMetadata.isPresent()){
+            if (camMetadata.isPresent()) {
                 camMetadata.get().setAddress(camMessage.getAddress());
                 camMetadata.get().setElevation(camMessage.getElevation());
                 camMetadata.get().setLongitude(camMessage.getLongitude());
@@ -65,16 +71,16 @@ public class TaskMessageConverter {
                 return camMetadata.get();
             }
             return null;
-        }catch (Exception e){
+        } catch (Exception e) {
             return new CamMetadata();
         }
 
     }
 
 
-    private List<ConstructMetadata> toConstructMetaData(List<ConstructionMessage> list, Photo photo){
+    private List<ConstructMetadata> toConstructMetaData(List<ConstructionMessage> list, Photo photo) {
         List<ConstructMetadata> newList = new ArrayList<>();
-        for (ConstructionMessage data:list){
+        for (ConstructionMessage data : list) {
             ConstructMetadata message = new ConstructMetadata();
             message.setAddress(data.getAddress());
             message.setId(data.getId());
@@ -89,20 +95,21 @@ public class TaskMessageConverter {
         return newList;
     }
 
-    private PhotoMessage toPhotoMessage(Photo photo){
+    private PhotoMessage toPhotoMessage(Photo photo) {
         PhotoMessage photoMessage = new PhotoMessage();
         photoMessage.setId(photo.getId());
-        photoMessage.setFilePath(photo.getFilePath());
+        photoMessage.setFilePathOriginal(photo.getFilePathOriginal());
+        photoMessage.setFilePathComplete(photo.getFilePathComplete());
         try {
             photoMessage.setCamMessage(toCamMessage(photo.getCamMetadata()));
-        } catch (Exception e){
+        } catch (Exception e) {
             photoMessage.setCamMessage(new CamMessage());
         }
         photoMessage.setConstructionMessageList(toConstructionMessageList(photo.getConstructMetadata()));
-        return  photoMessage;
+        return photoMessage;
     }
 
-    private CamMessage toCamMessage(CamMetadata camMetadata){
+    private CamMessage toCamMessage(CamMetadata camMetadata) {
         CamMessage camMessage = new CamMessage();
         camMessage.setId(camMetadata.getId());
         camMessage.setAddress(camMetadata.getAddress());
@@ -110,12 +117,12 @@ public class TaskMessageConverter {
         camMessage.setLongitude(camMetadata.getLongitude());
         camMessage.setBearing(camMetadata.getBearing());
         camMessage.setElevation(camMetadata.getElevation());
-        return  camMessage;
+        return camMessage;
     }
 
-    private List<ConstructionMessage> toConstructionMessageList(List<ConstructMetadata> list){
+    private List<ConstructionMessage> toConstructionMessageList(List<ConstructMetadata> list) {
         List<ConstructionMessage> newList = new ArrayList<>();
-        for (ConstructMetadata data:list){
+        for (ConstructMetadata data : list) {
             ConstructionMessage message = new ConstructionMessage();
             message.setId(data.getId());
             message.setType(data.getType());

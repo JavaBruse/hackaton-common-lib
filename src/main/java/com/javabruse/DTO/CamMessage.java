@@ -15,7 +15,6 @@ public class CamMessage {
     private Double bearing;
     private Double elevation;
 
-
     @Override
     public String toString() {
         return "CamMessage{" +

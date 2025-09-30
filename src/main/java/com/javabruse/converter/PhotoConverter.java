@@ -22,7 +22,8 @@ public class PhotoConverter {
     public PhotoResponse PhotoToPhotoResponse(Photo photo) {
         PhotoResponse photoResponse = new PhotoResponse();
         photoResponse.setId(photo.getId());
-        photoResponse.setFilePath(photo.getFilePath());
+        photoResponse.setFilePathOriginal(photo.getFilePathOriginal());
+        photoResponse.setFilePathComplete(photo.getFilePathComplete());
         photoResponse.setFileHash(photo.getFileHash());
         photoResponse.setUpdatedAt(photo.getUpdatedAt());
         photoResponse.setName(photo.getName());
@@ -42,7 +43,7 @@ public class PhotoConverter {
         Photo photo = new Photo();
         photo.setId(null);
         photo.setUserId(userId);
-        photo.setFilePath(photoRequest.getFilePath());
+        photo.setFilePathOriginal(photoRequest.getFilePath()); // filePathComplete нет на новом фото.
         photo.setFileHash("hash");
         photo.setName(photoRequest.getName());
         photo.setStatus(Status.TASK_NEW);
@@ -56,7 +57,7 @@ public class PhotoConverter {
     }
 
     public Photo photoRequestToUpdatePhoto(PhotoRequest photoRequest, Photo oldPhoto) {
-        oldPhoto.setFilePath(photoRequest.getFilePath());
+        oldPhoto.setFilePathOriginal(photoRequest.getFilePath());
         Task newTask = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
         if (!oldPhoto.getTask().equals(newTask)) {
             oldPhoto.setTask(newTask);
