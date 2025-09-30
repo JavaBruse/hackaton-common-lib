@@ -18,7 +18,10 @@ public class ConstructionMessage {
     @Override
     public String toString() {
         return "ConstructionMessage{" +
-                "address='" + address + '\'' +
+                "id=" + id +
+                ", position=" + position +
+                ", type='" + type + '\'' +
+                ", address='" + address + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 '}';
