@@ -33,6 +33,7 @@ public class TaskMessageConverter {
             newPhoto.setTask(taskRepo.findById(taskMessage.getTaskID()).get());
             newPhoto.setUpdatedAt(Instant.now().toEpochMilli());
             newPhoto.setStatus(status);
+            newPhoto.setFilePathComplete(newPhoto.getFilePathComplete());
             newPhoto.setCamMetadata(toCamMetaData(taskMessage.getPhotoMessage().getCamMessage(), photo.get()));
             newPhoto.setConstructMetadata(toConstructMetaData(taskMessage.getPhotoMessage().getConstructionMessageList(), photo.get()));
             return newPhoto;
