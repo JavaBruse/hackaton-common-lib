@@ -30,17 +30,11 @@ public class TaskMessageConverter {
         Optional<Photo> photo = photoRepo.findById(taskMessage.getPhotoMessage().getId());
         if (photo.isPresent()) {
             Photo newPhoto = photo.get();
-            log.info("-----------------------------этап 1 в конвертере таки в фото--------");
             newPhoto.setTask(taskRepo.findById(taskMessage.getTaskID()).get());
-            log.info("-----------------------------этап 2 в конвертере таки в фото--------");
             newPhoto.setUpdatedAt(Instant.now().toEpochMilli());
-            log.info("-----------------------------этап 3 в конвертере таки в фото--------");
             newPhoto.setStatus(status);
-            log.info("-----------------------------этап 4 в конвертере таки в фото--------");
             newPhoto.setCamMetadata(toCamMetaData(taskMessage.getPhotoMessage().getCamMessage(), photo.get()));
-            log.info("-----------------------------этап 5 в конвертере таки в фото--------");
             newPhoto.setConstructMetadata(toConstructMetaData(taskMessage.getPhotoMessage().getConstructionMessageList(), photo.get()));
-            log.info("-----------------------------этап 6 в конвертере таки в фото завершено конвертирование--------" + taskMessage);
             return newPhoto;
         }
         return null;
