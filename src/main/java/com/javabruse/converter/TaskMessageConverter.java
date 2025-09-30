@@ -69,8 +69,16 @@ public class TaskMessageConverter {
                 camMetadata.get().setBearing(camMessage.getBearing());
                 camMetadata.get().setPhoto(photo);
                 return camMetadata.get();
+            } else {
+                CamMetadata camMetadataNew = new CamMetadata();
+                camMetadataNew.setPhoto(photo);
+                camMetadataNew.setAddress(camMessage.getAddress());
+                camMetadataNew.setElevation(camMessage.getElevation());
+                camMetadataNew.setLongitude(camMessage.getLongitude());
+                camMetadataNew.setLatitude(camMessage.getLatitude());
+                camMetadataNew.setBearing(camMessage.getBearing());
+                return camMetadataNew;
             }
-            return null;
         } catch (Exception e) {
             return new CamMetadata();
         }
