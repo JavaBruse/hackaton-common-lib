@@ -60,7 +60,7 @@ public class TaskMessageConverter {
 
     private CamMetadata toCamMetaData(CamMessage camMessage, Photo photo) {
         try {
-            Optional<CamMetadata> camMetadata = camMetadataRepo.findById(camMessage.getId());
+            Optional<CamMetadata> camMetadata = camMetadataRepo.findByPhotoId(photo.getId());
             if (camMetadata.isPresent()) {
                 camMetadata.get().setAddress(camMessage.getAddress());
                 camMetadata.get().setElevation(camMessage.getElevation());
