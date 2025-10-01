@@ -55,6 +55,7 @@ public class PhotoConverter {
             CamMetadata camMetadata = new CamMetadata();
             camMetadata.setLatitude(photoRequest.getLatitude());
             camMetadata.setLongitude(photoRequest.getLongitude());
+            camMetadata.setPhoto(photo);
             photo.setCamMetadata(camMetadata);
         }
 //            photo.setConstructMetadata(new ArrayList<>());
