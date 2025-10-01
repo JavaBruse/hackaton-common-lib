@@ -51,7 +51,12 @@ public class PhotoConverter {
         photo.setFileSize(photoRequest.getFileSize());
         Task task = taskRepo.findById(photoRequest.getTaskId()).orElseThrow();
         photo.setTask(task);
-//            photo.setCamMetadata(null);
+        if (photoRequest.getLongitude()>0 && photoRequest.getLatitude()>0) {
+            CamMetadata camMetadata = new CamMetadata();
+            camMetadata.setLatitude(photoRequest.getLatitude());
+            camMetadata.setLongitude(photoRequest.getLongitude());
+            photo.setCamMetadata(camMetadata);
+        }
 //            photo.setConstructMetadata(new ArrayList<>());
         return photo;
     }

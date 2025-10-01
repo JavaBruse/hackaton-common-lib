@@ -14,4 +14,6 @@ public class PhotoRequest {
     private String name;
     private String contentType;
     private Long fileSize;
+    private Double longitude;
+    private Double latitude;
 }
