@@ -14,6 +14,7 @@ public class TaskMessage {
     private UUID id;
     private UUID taskID;
     private UUID userID;
+    private String URLDownloads;
     private PhotoMessage photoMessage;
 
     @Override
