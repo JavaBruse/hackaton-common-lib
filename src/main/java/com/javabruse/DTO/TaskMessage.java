@@ -13,6 +13,7 @@ import java.util.UUID;
 public class TaskMessage {
     private UUID id;
     private UUID taskID;
+    private UUID userID;
     private PhotoMessage photoMessage;
 
     @Override

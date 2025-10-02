@@ -47,6 +47,7 @@ public class TaskMessageConverter {
             TaskMessage photoTask = new TaskMessage();
             photoTask.setId(UUID.randomUUID());
             photoTask.setTaskID(task.getId());
+            photoTask.setUserID(task.getUserId());
             photoTask.setPhotoMessage(toPhotoMessage(photo));
             photoTaskDTOs.add(photoTask);
         }
