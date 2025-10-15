@@ -6,6 +6,7 @@ import com.javabruse.DTO.PhotoMessage;
 import com.javabruse.DTO.TaskMessage;
 import com.javabruse.model.*;
 import com.javabruse.repository.CamMetadataRepo;
+import com.javabruse.repository.ConstructMetadataRepo;
 import com.javabruse.repository.PhotoRepo;
 import com.javabruse.repository.TaskRepo;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class TaskMessageConverter {
     private final PhotoRepo photoRepo;
     private final TaskRepo taskRepo;
     private final CamMetadataRepo camMetadataRepo;
+    private final ConstructMetadataRepo constructMetadataRepo;
 
     public Photo taskMessageToPhoto(TaskMessage taskMessage, Status status) {
         Optional<Photo> photo = photoRepo.findById(taskMessage.getPhotoMessage().getId());
@@ -87,7 +89,7 @@ public class TaskMessageConverter {
         for (ConstructionMessage data : list) {
             ConstructMetadata message = new ConstructMetadata();
             message.setAddress(data.getAddress());
-            message.setId(data.getId());
+//            message.setId(data.getId());
             message.setType(data.getType());
             message.setPosition(data.getPosition());
             message.setAddress(data.getAddress());
