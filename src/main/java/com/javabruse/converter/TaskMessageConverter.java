@@ -37,11 +37,30 @@ public class TaskMessageConverter {
             newPhoto.setStatus(status);
             newPhoto.setFilePathComplete(taskMessage.getPhotoMessage().getFilePathComplete());
             newPhoto.setCamMetadata(toCamMetaData(taskMessage.getPhotoMessage().getCamMessage(), photo.get()));
-            newPhoto.setConstructMetadata(toConstructMetaData(taskMessage.getPhotoMessage().getConstructionMessageList(), photo.get()));
+//            newPhoto.setConstructMetadata(toConstructMetaData(taskMessage.getPhotoMessage().getConstructionMessageList(), photo.get()));
+            updateConstructMetadata(newPhoto, taskMessage.getPhotoMessage().getConstructionMessageList());
             return newPhoto;
         }
         return null;
     }
+
+    private void updateConstructMetadata(Photo photo, List<ConstructionMessage> constructionMessages) {
+        // Очищаем существующую коллекцию
+        photo.getConstructMetadata().clear();
+
+        // Добавляем новые элементы
+        for (ConstructionMessage data : constructionMessages) {
+            ConstructMetadata message = new ConstructMetadata();
+            message.setAddress(data.getAddress());
+            message.setType(data.getType());
+            message.setPosition(data.getPosition());
+            message.setLatitude(data.getLatitude());
+            message.setLongitude(data.getLongitude());
+            message.setPhoto(photo);
+            photo.getConstructMetadata().add(message);
+        }
+    }
+
 
     public List<TaskMessage> taskToTaskMessageList(Task task) {
         List<TaskMessage> photoTaskDTOs = new ArrayList<>();
