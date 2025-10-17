@@ -15,17 +15,18 @@ public class TaskConverter {
 
     private final PhotoConverter photoConverter;
 
-    public TaskResponse taskToTaskResponse(Task task){
+    public TaskResponse taskToTaskResponse(Task task) {
         TaskResponse taskResponse = new TaskResponse();
         taskResponse.setId(task.getId());
         taskResponse.setName(task.getName());
         taskResponse.setStatus(task.getStatus());
+        taskResponse.setPhotoCount(task.getPhotos().size());
         taskResponse.setCreatedAt(task.getCreatedAt());
         taskResponse.setUpdatedAt(task.getUpdatedAt());
         return taskResponse;
     }
 
-    public Task taskRequestNew(TaskRequest taskRequest, UUID userId){
+    public Task taskRequestNew(TaskRequest taskRequest, UUID userId) {
         Task task = new Task();
         task.setName(taskRequest.getName());
         task.setUserId(userId);
@@ -34,7 +35,7 @@ public class TaskConverter {
         return task;
     }
 
-    public Task taskRequestUpdate(TaskRequest taskRequest, Task taskOld){
+    public Task taskRequestUpdate(TaskRequest taskRequest, Task taskOld) {
         taskOld.setName(taskRequest.getName());
         taskOld.setStatus(Status.TASK_NEW);
         return taskOld;
