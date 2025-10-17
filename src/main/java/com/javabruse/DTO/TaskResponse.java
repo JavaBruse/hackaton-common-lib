@@ -14,6 +14,7 @@ public class TaskResponse {
     private UUID id;
     private String name;
     private Status status;
+    private Integer photoCount;
     private Long createdAt = Instant.now().toEpochMilli();
     private Long updatedAt = Instant.now().toEpochMilli();
 }
