@@ -1,11 +1,13 @@
 package com.javabruse.DTO;
 
 
+import com.javabruse.model.Photo;
 import com.javabruse.model.Status;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -14,7 +16,8 @@ public class TaskResponse {
     private UUID id;
     private String name;
     private Status status;
-    private Integer photoCount;
+//    private Integer photoCount;
     private Long createdAt = Instant.now().toEpochMilli();
     private Long updatedAt = Instant.now().toEpochMilli();
+    private List<PhotoResponse> photos;
 }

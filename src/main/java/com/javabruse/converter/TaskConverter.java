@@ -7,6 +7,7 @@ import com.javabruse.model.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -20,7 +21,12 @@ public class TaskConverter {
         taskResponse.setId(task.getId());
         taskResponse.setName(task.getName());
         taskResponse.setStatus(task.getStatus());
-        taskResponse.setPhotoCount(task.getPhotos() != null ? task.getPhotos().size() : 0);
+//        taskResponse.setPhotoCount(task.getPhotos() != null ? task.getPhotos().size() : 0);
+        if (task.getPhotos() != null) {
+            taskResponse.setPhotos(task.getPhotos().stream().map(photoConverter::PhotoToPhotoResponse).toList());
+        } else {
+            taskResponse.setPhotos(new ArrayList<>());
+        }
         taskResponse.setCreatedAt(task.getCreatedAt());
         taskResponse.setUpdatedAt(task.getUpdatedAt());
         return taskResponse;
