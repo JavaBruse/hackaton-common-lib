@@ -20,7 +20,7 @@ public class TaskConverter {
         taskResponse.setId(task.getId());
         taskResponse.setName(task.getName());
         taskResponse.setStatus(task.getStatus());
-        taskResponse.setPhotoCount(task.getPhotos().size());
+        taskResponse.setPhotoCount(task.getPhotos() != null ? task.getPhotos().size() : 0);
         taskResponse.setCreatedAt(task.getCreatedAt());
         taskResponse.setUpdatedAt(task.getUpdatedAt());
         return taskResponse;
