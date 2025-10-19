@@ -79,6 +79,9 @@ public class TaskMessageConverter {
         try {
             Optional<CamMetadata> camMetadata = camMetadataRepo.findByPhotoId(photo.getId());
             if (camMetadata.isPresent()) {
+                if(camMetadata.get().getLatitude()!=null & camMetadata.get().getLongitude()!=null){
+                    return camMetadata.get();
+                }
                 camMetadata.get().setAddress(camMessage.getAddress());
                 camMetadata.get().setElevation(camMessage.getElevation());
                 camMetadata.get().setLongitude(camMessage.getLongitude());
